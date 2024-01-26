@@ -11,7 +11,7 @@ namespace wavetablesynthesizer {
     public:
         static constexpr auto channelCount = oboe::ChannelCount::Mono;
 
-        OboeAudioPlayer(std::shared_ptr <AudioSource> source, int samplingRate);
+        OboeAudioPlayer(std::shared_ptr<AudioSource> source, int samplingRate);
 
         ~OboeAudioPlayer();
 
@@ -24,8 +24,8 @@ namespace wavetablesynthesizer {
                                               int32_t frameCount) override;
 
     private:
-        std::shared_ptr <AudioSource> _source;
-        std::shared_ptr <oboe::AudioStream> _stream;
+        std::shared_ptr<AudioSource> _source;
+        std::shared_ptr<oboe::AudioStream> _stream;
         int _samplingRate;
     };
 }

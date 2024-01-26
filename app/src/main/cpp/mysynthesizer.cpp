@@ -92,7 +92,7 @@ Java_com_norm_mysynthesizer_NativeWavetableSynthesizer_setVolume(JNIEnv *env, jo
     auto *synthesizer = reinterpret_cast<wavetablesynthesizer::WavetableSynthesizer *>(synthesizerHandle);
 
     if (synthesizer) {
-        wavetablesynthesizer::WavetableSynthesizer::setVolume(static_cast<float>(volumeInDb));
+        synthesizer->setVolume(static_cast<float>(volumeInDb));
 
     } else {
         LOGD("Synthesizer not create. Create the synthesizer first by calling create().");
@@ -107,7 +107,7 @@ Java_com_norm_mysynthesizer_NativeWavetableSynthesizer_setWavetable(JNIEnv *env,
     const auto nativeWavetable = static_cast<wavetablesynthesizer::Wavetable>(wavetable);
 
     if (synthesizer) {
-        wavetablesynthesizer::WavetableSynthesizer::setWavetable(nativeWavetable);
+        synthesizer->setWavetable(nativeWavetable);
 
     } else {
         LOGD("Synthesizer not create. Create the synthesizer first by calling create().");

@@ -1,13 +1,12 @@
 #pragma once
 
+#include <mutex>
 #include <memory>
+#include "Wavetable.h"
+#include "WavetableFactory.h"
 
 namespace wavetablesynthesizer {
-    enum class Wavetable {
-        SINE, TRIANGLE, SQUARE, SAW
-    };
-
-    class AudioSource;
+    class WavetableOscillator;
 
     class AudioPlayer;
 
@@ -25,15 +24,18 @@ namespace wavetablesynthesizer {
 
         bool isPlaying() const;
 
-        bool setFrequency(float frequencyInHz) const;
+        void setFrequency(float frequencyInHz);
 
-        static void setVolume(float volumeInDb);
+        void setVolume(float volumeInDb);
 
-        static void setWavetable(Wavetable wavetable);
+        void setWavetable(Wavetable wavetable);
 
     private:
-        bool _isPlaying = false;
-        std::shared_ptr<AudioSource> _oscillator;
+        std::atomic<bool> _isPlaying = false;
+        std::mutex _mutex;
+        WavetableFactory _wavetableFactory;
+        Wavetable _currentWavetable{Wavetable::SINE};
+        std::shared_ptr<WavetableOscillator> _oscillator;
         std::unique_ptr<AudioPlayer> _audioPlayer;
     };
 }
